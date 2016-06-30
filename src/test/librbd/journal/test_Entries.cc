@@ -172,6 +172,12 @@ TEST_F(TestJournalEntries, AioDiscard) {
   ASSERT_EQ(0, c->wait_for_complete());
   c->put();
 
+  CephContext* cct = reinterpret_cast<CephContext*>(_rados.cct());
+  if (cct->_conf->rbd_skip_partial_discard) {
+    ASSERT_FALSE(wait_for_entries_available(ictx));
+    return;
+  }
+
   ASSERT_TRUE(wait_for_entries_available(ictx));
 
   journal::ReplayEntry replay_entry;
