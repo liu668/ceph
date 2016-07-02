@@ -1456,7 +1456,7 @@ if(${WITH_RADOSGW})
   set_target_properties(rgw PROPERTIES OUTPUT_NAME rgw VERSION 2.0.0
     SOVERSION 1)
 
-  install(TARGETS rgw DESTINATION lib)
+  install(TARGETS rgw DESTINATION ${CMAKE_INSTALL_LIBDIR})
   install(FILES
     include/rados/librgw.h
     include/rados/rgw_file.h
